@@ -47,7 +47,7 @@ namespace Brownbag.Web {
                     options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver ();
                 });
 
-            services.AddKendo ();
+            // services.AddKendo ();
             services.AddScoped<IBrownbagRoleProvider, BrownbagRoleProvider> ();
 
             // In production, the Angular files will be served from this directory

@@ -19,6 +19,7 @@
     <PackageReference Include="Reinforced.Typings" Version="1.4.91" />
     <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
+    <!-- Remember to uncomment line 50 in Startup.cs to enable kendo integration -->
     <!-- <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2018.1.221" /> -->
   </ItemGroup>
 
