@@ -373,7 +373,8 @@ Paste in the following and hit save:
 			"miclo.sort-typescript-imports",
 			"eg2.tslint",
 			"rbbit.typescript-hero",
-			"robertohuertasm.vscode-icons"
+            "robertohuertasm.vscode-icons",
+			"hbenl.vscode-firefox-debug"            
 		]
 	}
 }
