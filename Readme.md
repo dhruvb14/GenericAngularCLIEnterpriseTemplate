@@ -59,6 +59,8 @@ Paste in the following Nuget Config in VSCode window that opened
 
 Save and close vscode
 
+**If not using Kendo remember to comment out line 50 in startup.cs and line and line 22 in Brownbag.Web.csproj or you will have build errors**
+
 Go to **https://www.telerik.com/account/product-download?product=UIASPCORE** and download the Telerik.UI.for.AspNet.Core*.nupkg and save it in the path listed below relative to the project directory:
 
 `.\Brownbag.Web\ClientApp\offline-resources`
