@@ -1,0 +1,50 @@
+import { BaseService } from './base.service';
+// import { ConfigService } from '../utils/config.service';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+
+
+@Injectable()
+export abstract class GridRestCallsBaseService extends BaseService {
+
+    baseUrl = '';
+    endpoint = '';
+
+    constructor(public http: HttpClient) {
+        super();
+    }
+    getGrid<T>(page: number, rows: number, searchQuery: string, optionalHttpParams?: { param: string, value: string }[]): Observable<T> {
+        // All grids will have paging and row count so we check them and set defaults
+        const pageNumber = page ? page.toString() : '0';
+        const rowNumber = rows ? rows.toString() : '10';
+        let myParams = new HttpParams();
+
+        // Append the page and row counts
+        myParams = myParams.append('currentPage', pageNumber);
+        myParams = myParams.append('rows', rowNumber);
+
+        // Check if a search query is being performed and apped it
+        if (searchQuery) {
+            myParams = myParams.append('searchQuery', searchQuery);
+        }
+
+        // This allows for additional overrides for one off grid implementations
+        if (optionalHttpParams) {
+            optionalHttpParams.forEach(param => {
+                myParams = myParams.append(param.param, param.value);
+            });
+        }
+        return this.http.get<T>((this.baseUrl + this.endpoint), { params: myParams })
+            .catch(this.handleError);
+    }
+    getGridItemDetails<T>(id: string): Observable<T> {
+        return this.http.get<T>((this.baseUrl + this.endpoint + id))
+            .catch(this.handleError);
+    }
+    updateGridItem<T>(entity: T) {
+        return this.http.put(this.baseUrl + this.endpoint, entity)
+            .catch(this.handleError);
+    }
+}

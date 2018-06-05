@@ -1,0 +1,36 @@
+  <Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+      <TargetFramework>netcoreapp2.0</TargetFramework>
+      <Configurations>Debug;Release;Integrated</Configurations>
+      <RuntimeFrameworkVersion>2.0.6</RuntimeFrameworkVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.2" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.2" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" />
+      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+      <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
+
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore">
+        <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.identity.entityframeworkcore\2.0.0\lib\netstandard2.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll</HintPath>
+      </Reference>
+      <Reference Include="Microsoft.Extensions.Identity.Stores">
+        <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.identity.stores\2.0.0\lib\netstandard2.0\Microsoft.Extensions.Identity.Stores.dll</HintPath>
+      </Reference>
+      <Reference Include="System">
+        <HintPath>System</HintPath>
+      </Reference>
+      <Reference Include="System.Data">
+        <HintPath>System.Data</HintPath>
+      </Reference>
+      <Reference Include="System.Xml">
+        <HintPath>System.Xml</HintPath>
+      </Reference>
+    </ItemGroup>
+
+  </Project>

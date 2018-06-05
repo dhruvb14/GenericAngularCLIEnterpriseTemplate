@@ -1,0 +1,31 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"csharpfixformat.style.spaces.beforeParenthesis": false,
+		"npm.enableScriptExplorer": true
+	},
+	"extensions": {
+		"recommendations": [
+			"alexiv.vscode-angular2-files",
+			"Angular.ng-template",
+			"ms-vscode.csharp",
+			"jchannon.csharpextensions",
+			"Leopotam.csharpfixformat",
+			"msjsdiag.debugger-for-chrome",
+			"xykong.format-all-files",
+			"eamodio.gitlens",
+			"yzhang.markdown-all-in-one",
+			"DavidAnson.vscode-markdownlint",
+			"stringham.move-ts",
+			"tintoy.msbuild-project-tools",
+			"miclo.sort-typescript-imports",
+			"eg2.tslint",
+			"rbbit.typescript-hero",
+			"robertohuertasm.vscode-icons"
+		]
+	}
+}

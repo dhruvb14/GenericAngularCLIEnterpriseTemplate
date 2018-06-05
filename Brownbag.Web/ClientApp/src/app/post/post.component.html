@@ -1,0 +1,102 @@
+<h2>{{entityTitlePlural}}</h2>
+<div *ngIf="state.Errors" class="alert alert-danger" role="alert">
+  <strong>Oops!</strong>
+  <pre>{{state.Errors}}</pre>
+</div>
+<div class="row">
+  <div class="col-12">
+    <p-table #dt [value]="state.Data" [rows]="state.Rows" selectionMode="single" [(selection)]="selectedGridItem" (onRowSelect)="onRowSelect($event)">
+      <ng-template pTemplate="caption">
+        <div style="text-align: right">
+          <button type="button" style="text-align:left" class="pull-left" (click)="showDialogToAdd()" label="Add">
+            <i class="fa fa-plus"></i> Add {{entityTitleSingular}}</button>
+          <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+          <input type="text" pInputText size="50" placeholder="Global Filter" [ngModel]='state.SearchQuery' (ngModelChange)="searchDebouncer($event)"
+            style="width:auto">
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Id</th>
+          <th>Title</th>
+          <th>Content</th>
+          <th>Associated Blog</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-selectedGridItem>
+        <tr [pSelectableRow]="selectedGridItem">
+          <td>{{selectedGridItem.Id}}</td>
+          <td>{{selectedGridItem.Title}}</td>
+          <td [innerHTML]="selectedGridItem.Content"></td>
+          <td>{{selectedGridItem.Blog.Url}}</td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+    <p-paginator rows="10" [totalRecords]="state.PageCount * state.Rows" (onPageChange)="paginate($event)" [rowsPerPageOptions]="[10,20,30,40,50]"></p-paginator>
+
+  </div>
+</div>
+<p-dialog header="{{isNew ? 'Add':'Edit'}} {{entityTitleSingular}}" [(visible)]="displayDialog" *ngIf="selectedGridItem"
+  [responsive]="true" showEffect="fade" [modal]="true" [width]="500">
+  <div *ngIf="editErrors" class="alert alert-danger" role="alert">
+    <strong>Oops!</strong>
+    <pre>{{editErrors}}</pre>
+  </div>
+  <form #formEdit="ngForm" (ngSubmit)="save(formEdit.value)">
+    <div class="ui-g ui-fluid" *ngIf="selectedGridItem">
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          Id
+        </div>
+        <div class="ui-g-8">
+          <input type="text" size="50" name="Id" class="form-control" readonly [ngModel]="selectedGridItem.Id">
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          Title*
+        </div>
+        <div class="ui-g-8">
+          <input type="text" size="50" name="Title" class="form-control" required [ngModel]="selectedGridItem.Title">
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          Content*
+        </div>
+        <div class="ui-g-8">
+          <p-editor name="Content" [(ngModel)]="selectedGridItem.Content" [style]="{'height':'320px'}">
+            
+          </p-editor>
+          <!-- <textarea [rows]="5" [cols]="30" pInputTextarea class="form-control" name="Content" [(ngModel)]="selectedGridItem.Content" autoResize="autoResize"></textarea> -->
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          Blog
+        </div>
+        <div class="ui-g-8">
+          <select class="form-control" name="BlogId" required [(ngModel)]="selectedGridItem.BlogId">
+            <option *ngFor="let item of BlogLookups" [value]="item.ID">{{item.Value}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+
+    <p-footer *ngIf="selectedGridItem">
+      <div class="ui-dialog-buttonpane ui-helper-clearfix">
+        <button type="submit" [disabled]="!formEdit.form.valid" required class="btn btn-primary">
+          <span [ngClass]="isNew ? 'fa fa-plus' : 'fa fa-save'"></span> {{isNew ? 'Add ' + entityTitleSingular: 'Save ' + entityTitleSingular}}
+        </button>
+        <button type="button" class="btn btn-danger" (click)="close()">
+          <span class="fa fa-close"></span> Close
+        </button>
+
+      </div>
+
+    </p-footer>
+  </form>
+</p-dialog>

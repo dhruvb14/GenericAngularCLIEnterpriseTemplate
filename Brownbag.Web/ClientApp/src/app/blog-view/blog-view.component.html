@@ -1,0 +1,35 @@
+<h2>{{entityTitlePlural}}</h2>
+<div *ngIf="state.Errors" class="alert alert-danger" role="alert">
+  <strong>Oops!</strong>
+  <pre>{{state.Errors}}</pre>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="ui-g-3">
+      Current Blog
+    </div>
+    <div class="ui-g-9">
+      <select class="form-control" name="CurrentBlogId" required [(ngModel)]="CurrentBlogId" (change)="getGridData()">
+        <option *ngFor="let item of BlogLookups" [value]="item.ID">{{item.Value}}</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <p-dataGrid [value]="state.Data" [rows]="state.Rows">
+      <ng-template let-car pTemplate="item">
+        <div class="ui-g-12">
+          <p-card [title]="car.Title" [subtitle]="'Written by: '+ car?.CreatedByUser?.UserFullName">
+            <div class="ui-card-subtitle"> {{car?.CreatedDate | date:'short'}}</div>
+            <div class="ui-card-content" [innerHTML]="car.Content"></div>
+            <p-footer *ngIf="car?.UpdatedByUser?.UserFullName !== car?.CreatedByUser?.UserFullName">
+              Updated by: {{car?.UpdatedByUser?.UserFullName}} on {{car?.UpdatedDate | date:'short'}}
+            </p-footer>
+          </p-card>
+        </div>
+      </ng-template>
+    </p-dataGrid>
+    <p-paginator rows="10" [totalRecords]="state.PageCount * state.Rows" (onPageChange)="paginate($event)" [rowsPerPageOptions]="[10,20,30,40,50]"></p-paginator>
+  </div>
+</div>

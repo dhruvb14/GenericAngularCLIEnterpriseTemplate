@@ -1,0 +1,104 @@
+<h2>{{entityTitlePlural}}</h2>
+<div *ngIf="state.Errors" class="alert alert-danger" role="alert">
+  <strong>Oops!</strong>
+  <pre>{{state.Errors}}</pre>
+</div>
+<div class="row">
+  <div class="col-12">
+    <p-table #dt [value]="state.Data" [rows]="state.Rows" selectionMode="single" [(selection)]="selectedGridItem" (onRowSelect)="onRowSelect($event)">
+      <ng-template pTemplate="caption">
+        <div style="text-align: right">
+          <button type="button" style="text-align:left" class="pull-left" (click)="showDialogToAdd()" label="Add">
+            <i class="fa fa-plus"></i> Add {{entityTitleSingular}}</button>
+          <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+          <input type="text" pInputText size="50" placeholder="Global Filter" [ngModel]='state.SearchQuery' (ngModelChange)="searchDebouncer($event)"
+            style="width:auto">
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Id</th>
+          <th>Url</th>
+          <th>Rating</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-selectedGridItem>
+        <tr [pSelectableRow]="selectedGridItem">
+          <td>{{selectedGridItem.Id}}</td>
+          <td>{{selectedGridItem.Url}}</td>
+          <td>
+            <p-rating cancel="false" stars="10" readonly="true" [(ngModel)]="selectedGridItem.Rating"></p-rating>
+          </td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+    <p-paginator rows="10" [totalRecords]="state.PageCount * state.Rows" (onPageChange)="paginate($event)" [rowsPerPageOptions]="[10,20,30,40,50]"></p-paginator>
+
+  </div>
+</div>
+<p-dialog header="{{isNew ? 'Add':'Edit'}} {{entityTitleSingular}}" [(visible)]="displayDialog" *ngIf="selectedGridItem"
+  [responsive]="true" showEffect="fade" [modal]="true" [width]="500">
+  <div *ngIf="editErrors" class="alert alert-danger" role="alert">
+    <strong>Oops!</strong>
+    <pre>{{editErrors}}</pre>
+  </div>
+  <form #formEdit="ngForm" (ngSubmit)="save(formEdit.value)">
+    <div class="ui-g ui-fluid" *ngIf="selectedGridItem">
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          Id
+        </div>
+        <div class="ui-g-8">
+          <input type="text" size="50" name="Id" class="form-control" [ngModel]="selectedGridItem.Id">
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          Url*
+        </div>
+        <div class="ui-g-8">
+          <input type="text" size="50" name="Url" class="form-control" required [ngModel]="selectedGridItem.Url">
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          Rating*
+        </div>
+        <div class="ui-g-8">
+          <p-rating name="Rating" stars="10" [(ngModel)]="selectedGridItem.Rating"></p-rating>
+        </div>
+      </div>
+    </div>
+    <h4>Associated Blog Posts</h4>
+    <p-table [columns]="PostsCols" [value]="selectedGridItem.Posts" [paginator]="true" [rows]="5">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns">
+            {{col.header}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns">
+            <div [innerHTML]="rowData[col.field]"></div>
+
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-footer *ngIf="selectedGridItem">
+      <div class="ui-dialog-buttonpane ui-helper-clearfix">
+        <button type="submit" [disabled]="!formEdit.form.valid" required class="btn btn-primary">
+          <span [ngClass]="isNew ? 'fa fa-plus' : 'fa fa-save'"></span> {{isNew ? 'Add ' + entityTitleSingular: 'Save ' + entityTitleSingular}}
+        </button>
+        <button type="button" class="btn btn-danger" (click)="close()">
+          <span class="fa fa-close"></span> Close
+        </button>
+
+      </div>
+
+    </p-footer>
+  </form>
+</p-dialog>

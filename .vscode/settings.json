@@ -1,0 +1,11 @@
+{
+    "tslint.exclude": [
+        "./Brownbag.Web/ClientApp/src/models/project.ts",
+        "**/node_modules/**"
+    ],
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    },
+    "npm.enableScriptExplorer": true,
+    "csharpfixformat.sort.usings.enabled": true,
+}
