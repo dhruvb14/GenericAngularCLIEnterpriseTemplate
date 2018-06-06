@@ -10,6 +10,11 @@ module Brownbag.Web.Models {
 		CreatedDate: any;
 		UpdatedDate: any;
 	}
+	export interface BlogFKViewModel extends Brownbag.Web.Models.BlogViewModel
+	{
+		WeatherID: number;
+		WeatherCityName: string;
+	}
 	export interface BlogViewModel
 	{
 		Id: number;
