@@ -9,6 +9,8 @@ namespace Brownbag.Web.Automapper
         {
             CreateMap<Blog, BlogViewModel>()
            .ReverseMap();
+            CreateMap<Blog, BlogFKViewModel>()
+           .ReverseMap();           
             CreateMap<Post, PostViewModel>()
            .ReverseMap();
            CreateMap<Post, BlogPostsViewModel>();

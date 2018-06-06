@@ -42,6 +42,12 @@
                         <span class='glyphicon glyphicon-th-list'></span> Blog View
                     </a>
                 </li>
+                <hr />
+                <li [routerLinkActive]='["link-active"]'>
+                    <a [routerLink]='["/blogfk"]' (click)='collapse()'>
+                        <span class='glyphicon glyphicon-th-list'></span> Blog FK
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

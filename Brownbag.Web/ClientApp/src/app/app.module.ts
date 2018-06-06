@@ -16,6 +16,8 @@ import { RatingModule } from 'primeng/rating';
 import { TableModule } from 'primeng/table';
 import { LookupsService } from '../shared/service/lookups.service';
 import { AppComponent } from './app.component';
+import { BlogFKComponent } from './blog-fk/blog-fk.component';
+import { BlogFKService } from './blog-fk/blog-fk.service';
 import { BlogViewComponent } from './blog-view/blog-view.component';
 import { BlogViewService } from './blog-view/blog-view.service';
 import { BlogComponent } from './blog/blog.component';
@@ -36,7 +38,8 @@ import { PostService } from './post/post.service';
     FetchDataComponent,
     BlogComponent,
     PostComponent,
-    BlogViewComponent
+    BlogViewComponent,
+    BlogFKComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -58,11 +61,12 @@ import { PostService } from './post/post.service';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'blog', component: BlogComponent },
+      { path: 'blogfk', component: BlogFKComponent },
       { path: 'post', component: PostComponent },
       { path: 'blogview', component: BlogViewComponent },
     ]),
   ],
-  providers: [BlogService, BlogViewService, PostService, LookupsService],
+  providers: [BlogService, BlogFKService, BlogViewService, PostService, LookupsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
