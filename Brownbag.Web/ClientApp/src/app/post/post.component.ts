@@ -36,6 +36,6 @@ export class PostComponent extends GridComponentBaseService<Brownbag.Web.Models.
   ngOnInit() {
     this.getGridData();
     this.initilizeLookups();
-    this.notificationsService.createSuccessMessage('Created Success Message', 'Summary');
+    this.notificationsService.createSuccessMessage('Init Success', 'Post Component');
   }
 }
