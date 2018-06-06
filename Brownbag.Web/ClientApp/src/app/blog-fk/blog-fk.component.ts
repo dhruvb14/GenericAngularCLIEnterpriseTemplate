@@ -8,7 +8,7 @@ import { BlogFKService } from './blog-fk.service';
   templateUrl: './blog-fk.component.html',
   styleUrls: ['./blog-fk.component.css']
 })
-export class BlogFKComponent extends GridComponentBaseService<Brownbag.Web.Models.BlogViewModel> implements OnInit {
+export class BlogFKComponent extends GridComponentBaseService<Brownbag.Web.Models.BlogFKViewModel> implements OnInit {
   public PostsCols: any[];
   constructor(gridService: BlogFKService, notificationsService: AdvGrowlService) {
 
