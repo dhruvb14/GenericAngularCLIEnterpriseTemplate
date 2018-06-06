@@ -1811,7 +1811,7 @@ dotnet ef --startup-project ../Brownbag.Web migrations add InitialMigration
 dotnet ef --startup-project ../Brownbag.Web database update
 ```
 
-## Open SQL Management Studio and create yourself a user, role (Admin) and update your usersrole table.
+## Open SQL Management Studio and create yourself a user, role (Admin) and update your usersrole table
 
 ## Launch
 
@@ -2223,7 +2223,7 @@ export class BlogComponent extends GridComponentBaseService<Brownbag.Web.Models.
   }
   ngOnInit() {
     this.getGridData();
-    this.notificationsService.createSuccessMessage('Created Success Message', 'Summary');
+    this.notificationsService.createSuccessMessage('Init Success', 'Blog Component');
   }
 }
 
@@ -2411,7 +2411,7 @@ export class BlogViewComponent extends GridComponentBaseService<Brownbag.Web.Mod
   }
   ngOnInit() {
     this.initilizeLookups();
-    this.notificationsService.createSuccessMessage('Created Success Message', 'Summary');
+    this.notificationsService.createSuccessMessage('Init Success', 'Blog View Component');
   }
 }
 
@@ -2527,7 +2527,7 @@ export class PostComponent extends GridComponentBaseService<Brownbag.Web.Models.
   ngOnInit() {
     this.getGridData();
     this.initilizeLookups();
-    this.notificationsService.createSuccessMessage('Created Success Message', 'Summary');
+    this.notificationsService.createSuccessMessage('Init Success', 'Post Component');
   }
 }
 

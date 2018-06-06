@@ -39,6 +39,6 @@ export class BlogViewComponent extends GridComponentBaseService<Brownbag.Web.Mod
   }
   ngOnInit() {
     this.initilizeLookups();
-    this.notificationsService.createSuccessMessage('Created Success Message', 'Summary');
+    this.notificationsService.createSuccessMessage('Init Success', 'Blog View Component');
   }
 }
