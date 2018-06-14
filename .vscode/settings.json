@@ -1,6 +1,6 @@
 {
     "tslint.exclude": [
-        "./Brownbag.Web/ClientApp/src/models/project.ts",
+        "**/Brownbag.Web/ClientApp/src/models/**",
         "**/node_modules/**"
     ],
     "editor.codeActionsOnSave": {
