@@ -1,6 +1,5 @@
 /* tslint:disable:no-unused-variable */
 import { HttpClientModule, HttpBackend } from '@angular/common/http';
-import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed, getTestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,7 +15,6 @@ import { RatingModule } from 'primeng/rating';
 import { TableModule } from 'primeng/table';
 import { Observable } from 'rxjs/Observable';
 import { GridRestCallsBaseService } from '../../shared/service/grid-base-rest.service';
-import { GridComponentBaseService } from '../../shared/service/grid-component-base.service';
 import { LookupsService } from '../../shared/service/lookups.service';
 import { BlogViewComponent } from './blog-view.component';
 import { blogViewGridData } from './blog-view.data';
@@ -30,24 +28,13 @@ describe('BlogViewComponent', () => {
   const mockBlogViewService = jasmine.createSpyObj('mockBlogViewService', ['getGrid']);
   const mockGridRestCallsBaseService = jasmine.createSpyObj('mockGridRestCallsBaseService', ['getGrid']);
   const mockAdvGrowlService = jasmine.createSpyObj('mockAdvGrowlService', ['createSuccessMessage']);
-  let LookupsServiceStub: Partial<LookupsService>;
-  let BlogViewServiceStub: Partial<BlogViewService>;
-  const AfrTypesResponse: Brownbag.Web.Models.LookupViewModel[] = [{ 'ID': 1, 'Value': 'google.com' }, { 'ID': 2, 'Value': 'apple.com' }];
-  LookupsServiceStub = {
-    getBlogs() {
-      return Observable.of(AfrTypesResponse);
-    }
-  };
-  BlogViewServiceStub = {
-    // tslint:disable-next-line:max-line-length
-    getGrid<T>(page: number, rows: number, searchQuery: string, optionalHttpParams?: { param: string, value: string }[]): Observable<T> {
-      return Observable.of(blogViewGridData);
-    }
-  };
-  // let injector: TestBed;
-  // let httpMock: HttpTestingController;
+  const afrTypesResponse: Brownbag.Web.Models.LookupViewModel[] = [
+    { 'ID': 1, 'Value': 'google.com' },
+    { 'ID': 2, 'Value': 'apple.com' }
+  ];
+
   beforeEach(async(() => {
-    mockLookupService.getBlogs.and.returnValue(Observable.of(AfrTypesResponse));
+    mockLookupService.getBlogs.and.returnValue(Observable.of(afrTypesResponse));
     mockBlogViewService.getGrid.and.returnValue(Observable.of(blogViewGridData));
     mockGridRestCallsBaseService.getGrid.and.returnValue(Observable.of(blogViewGridData));
     TestBed.configureTestingModule({
@@ -71,15 +58,11 @@ describe('BlogViewComponent', () => {
         { provide: LookupsService, useValue: mockLookupService },
         { provide: BlogViewService, useValue: mockBlogViewService },
         { provide: AdvGrowlService, useValue: mockAdvGrowlService },
-        // { provide: GridComponentBaseService, useValue: GridComponentBaseService },
         { provide: GridRestCallsBaseService, useValue: mockGridRestCallsBaseService }
       ]
-      // private lookupsService: LookupsService, gridService: BlogViewService, notificationsService: AdvGrowlService
     })
       .compileComponents();
   }));
-  // injector = getTestBed();
-  // httpMock = injector.get(HttpTestingController);
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BlogViewComponent);
@@ -90,4 +73,15 @@ describe('BlogViewComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should display a title', async(() => {
+    const titleText = fixture.nativeElement.querySelector('h2').textContent;
+    expect(titleText).toEqual('Blogs Content');
+  }));
+  it('should choose second drop down', async(() => {
+    component.CurrentBlogId = 2;
+    fixture.detectChanges();
+
+    // const titleText = fixture.nativeElement.querySelector('h2').textContent;
+    expect(component.CurrentBlogId).toEqual(2);
+  }));
 });
