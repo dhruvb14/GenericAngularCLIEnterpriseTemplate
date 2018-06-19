@@ -1,3 +1,5 @@
+[![Build Status](https://img.shields.io/appveyor/ci/dhruvb14/GenericAngularCLIEnterpriseTemplate/master.svg)](https://ci.appveyor.com/project/dhruvb14/GenericAngularCLIEnterpriseTemplate)
+
 # Modern Web Application Baseline
 
 - Install Node.js latest LTS release **https://nodejs.org/**
