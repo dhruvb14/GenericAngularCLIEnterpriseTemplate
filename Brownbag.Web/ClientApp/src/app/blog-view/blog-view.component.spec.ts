@@ -26,7 +26,6 @@ describe('BlogViewComponent', () => {
   let fixture: ComponentFixture<BlogViewComponent>;
   const mockLookupService = jasmine.createSpyObj('mockLookupService', ['getBlogs']);
   const mockBlogViewService = jasmine.createSpyObj('mockBlogViewService', ['getGrid']);
-  const mockGridRestCallsBaseService = jasmine.createSpyObj('mockGridRestCallsBaseService', ['getGrid']);
   const mockAdvGrowlService = jasmine.createSpyObj('mockAdvGrowlService', ['createSuccessMessage']);
   const afrTypesResponse: Brownbag.Web.Models.LookupViewModel[] = [
     { 'ID': 1, 'Value': 'google.com' },
@@ -36,7 +35,6 @@ describe('BlogViewComponent', () => {
   beforeEach(async(() => {
     mockLookupService.getBlogs.and.returnValue(Observable.of(afrTypesResponse));
     mockBlogViewService.getGrid.and.returnValue(Observable.of(blogViewGridData));
-    mockGridRestCallsBaseService.getGrid.and.returnValue(Observable.of(blogViewGridData));
     TestBed.configureTestingModule({
       declarations: [BlogViewComponent],
       imports: [
@@ -58,7 +56,6 @@ describe('BlogViewComponent', () => {
         { provide: LookupsService, useValue: mockLookupService },
         { provide: BlogViewService, useValue: mockBlogViewService },
         { provide: AdvGrowlService, useValue: mockAdvGrowlService },
-        { provide: GridRestCallsBaseService, useValue: mockGridRestCallsBaseService }
       ]
     })
       .compileComponents();
