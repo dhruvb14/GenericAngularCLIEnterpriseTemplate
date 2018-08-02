@@ -4,7 +4,7 @@
         "**/node_modules/**"
     ],
     "editor.codeActionsOnSave": {
-        "source.organizeImports": true
+        "source.organizeImports": false
     },
     "npm.enableScriptExplorer": true,
     "csharpfixformat.sort.usings.enabled": true,
