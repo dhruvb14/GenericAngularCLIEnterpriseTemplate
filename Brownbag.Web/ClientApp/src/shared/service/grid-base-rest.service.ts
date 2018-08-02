@@ -2,8 +2,9 @@ import { BaseService } from './base.service';
 // import { ConfigService } from '../utils/config.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
 
 
 @Injectable()
@@ -37,14 +38,13 @@ export abstract class GridRestCallsBaseService extends BaseService {
             });
         }
         return this.http.get<T>((this.baseUrl + this.endpoint), { params: myParams })
-            .catch(this.handleError);
+        .pipe(catchError( err => this.handleError(err)));
     }
     getGridItemDetails<T>(id: string): Observable<T> {
         return this.http.get<T>((this.baseUrl + this.endpoint + id))
-            .catch(this.handleError);
+        .pipe(catchError( err => this.handleError(err)));
     }
     updateGridItem<T>(entity: T) {
         return this.http.put(this.baseUrl + this.endpoint, entity)
-            .catch(this.handleError);
-    }
+        .pipe(catchError( err => this.handleError(err)));    }
 }

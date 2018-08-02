@@ -15,7 +15,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { PaginatorModule } from 'primeng/paginator';
 import { RatingModule } from 'primeng/rating';
 import { TableModule } from 'primeng/table';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 
 import { BlogComponent } from './blog.component';
 import { BlogService } from './blog.service';
@@ -28,7 +28,7 @@ describe('BlogComponent', () => {
   const mockBlogViewService = jasmine.createSpyObj('mockBlogViewService', ['getGrid']);
 
   beforeEach(async(() => {
-    mockBlogViewService.getGrid.and.returnValue(Observable.of(BlogData));
+    mockBlogViewService.getGrid.and.returnValue(of(BlogData));
     TestBed.configureTestingModule({
       declarations: [BlogComponent],
       imports: [

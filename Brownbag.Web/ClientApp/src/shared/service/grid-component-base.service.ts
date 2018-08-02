@@ -1,8 +1,9 @@
 import { AdvGrowlService } from 'primeng-advanced-growl';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
+import { Subject } from 'rxjs';
+
+
 import { GridRestCallsBaseService } from './grid-base-rest.service';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 export abstract class GridComponentBaseService<T> {
     public state: Brownbag.Web.Models.PrimeNG.Grid.GridViewModel<T>;
@@ -31,8 +32,8 @@ export abstract class GridComponentBaseService<T> {
         results of the correct (second) query.
         */
         this.searchQueryDebouncer
-            .debounceTime(500) // wait 500ms after the last event before emitting last event
-            .distinctUntilChanged() // only emit if value is different from previous value
+            .pipe(debounceTime(500)) // wait 500ms after the last event before emitting last event
+            .pipe(distinctUntilChanged()) // only emit if value is different from previous value
             .subscribe(model => {
                 this.state.SearchQuery = model;
                 this.globalSearch(model);
@@ -72,7 +73,7 @@ export abstract class GridComponentBaseService<T> {
                 },
                 error => {
                     this.state.Errors = error;
-                    this.notificationsService.createTimedErrorMessage(error, 'Error!', 0);
+                    this.notificationsService.createErrorMessage(error, 'Error!', 0);
                 });
     }
     getGridData(optionalHttpParams?: { param: string, value: string }[]) {
@@ -86,7 +87,7 @@ export abstract class GridComponentBaseService<T> {
                 },
                 error => {
                     this.state.Errors = error;
-                    this.notificationsService.createTimedErrorMessage(error, 'Error!', 0);
+                    this.notificationsService.createErrorMessage(error, 'Error!', 0);
                 });
     }
     searchDebouncer(text: string) {
@@ -139,7 +140,7 @@ export abstract class GridComponentBaseService<T> {
                 },
                 error => {
                     this.editErrors = error;
-                    this.notificationsService.createTimedErrorMessage(error, 'Error!', 0);
+                    this.notificationsService.createErrorMessage(error, 'Error!', 0);
                 });
     }
 
