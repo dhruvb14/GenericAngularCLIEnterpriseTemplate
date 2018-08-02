@@ -13,7 +13,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { PaginatorModule } from 'primeng/paginator';
 import { RatingModule } from 'primeng/rating';
 import { TableModule } from 'primeng/table';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 import { GridRestCallsBaseService } from '../../shared/service/grid-base-rest.service';
 import { LookupsService } from '../../shared/service/lookups.service';
 import { BlogViewComponent } from './blog-view.component';
@@ -33,8 +33,8 @@ describe('BlogViewComponent', () => {
   ];
 
   beforeEach(async(() => {
-    mockLookupService.getBlogs.and.returnValue(Observable.of(afrTypesResponse));
-    mockBlogViewService.getGrid.and.returnValue(Observable.of(blogViewGridData));
+    mockLookupService.getBlogs.and.returnValue(of(afrTypesResponse));
+    mockBlogViewService.getGrid.and.returnValue(of(blogViewGridData));
     TestBed.configureTestingModule({
       declarations: [BlogViewComponent],
       imports: [
