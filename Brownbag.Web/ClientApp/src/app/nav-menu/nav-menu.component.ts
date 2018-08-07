@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { environment } from '../../environments/environment';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-nav-menu',
@@ -6,13 +8,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
-  isExpanded = false;
-
-  collapse() {
-    this.isExpanded = false;
-  }
-
-  toggle() {
-    this.isExpanded = !this.isExpanded;
-  }
+  navbarCollapsed: Boolean;
+  readonly baseURL = environment.apiUrl;
 }
