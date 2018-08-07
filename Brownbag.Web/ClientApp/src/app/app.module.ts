@@ -26,6 +26,7 @@ import { HomeComponent } from './home/home.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { PostComponent } from './post/post.component';
 import { PostService } from './post/post.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { PostService } from './post/post.service';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    NgbModule.forRoot(),
     HttpClientModule,
     FormsModule,
     DropdownModule,
