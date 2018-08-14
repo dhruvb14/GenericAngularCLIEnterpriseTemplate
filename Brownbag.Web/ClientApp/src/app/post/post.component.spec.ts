@@ -15,7 +15,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { PaginatorModule } from 'primeng/paginator';
 import { RatingModule } from 'primeng/rating';
 import { TableModule } from 'primeng/table';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,8 +34,8 @@ describe('PostComponent', () => {
   ];
 
   beforeEach(async(() => {
-    mockLookupService.getBlogs.and.returnValue(Observable.of(afrTypesResponse));
-    mockBlogViewService.getGrid.and.returnValue(Observable.of(PostData));
+    mockLookupService.getBlogs.and.returnValue(of(afrTypesResponse));
+    mockBlogViewService.getGrid.and.returnValue(of(PostData));
     TestBed.configureTestingModule({
       declarations: [ PostComponent ],
       imports: [

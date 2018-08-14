@@ -1,11 +1,13 @@
-<adv-growl [life]="3000" freezeMessagesOnHover="true"></adv-growl>
-<div class='container-fluid'>
-  <div class='row'>
-    <div class='col-sm-3'>
-      <app-nav-menu></app-nav-menu>
-    </div>
-    <div class='col-sm-9 body-content'>
-      <router-outlet></router-outlet>
-    </div>
-  </div>
+<app-nav-menu></app-nav-menu>
+<div class="container-fluid">
+  <router-outlet></router-outlet>
+  <adv-growl [life]="3000" freezeMessagesOnHover="true"></adv-growl>
+  <hr />
 </div>
+<!--FORCE FOOTER Z-INDEX TO MAKE SURE ITS ALWAYS ONTOP-->
+<footer class="footer" style="z-index:15000">
+  <div class="container-fluid">
+    <span class="text-muted">&copy; {{footer}}</span>
+    <span class="text-muted pull-right">USERNAME HERE</span>
+  </div>
+</footer>

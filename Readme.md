@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/appveyor/ci/dhruvb14/GenericAngularCLIEnterpriseTemplate/master.svg)](https://ci.appveyor.com/project/dhruvb14/GenericAngularCLIEnterpriseTemplate)
+Master Branch: [![Build Status](https://img.shields.io/appveyor/ci/dhruvb14/GenericAngularCLIEnterpriseTemplate/master.svg)](https://ci.appveyor.com/project/dhruvb14/GenericAngularCLIEnterpriseTemplate)
 
 # Modern Web Application Baseline
 
@@ -18,6 +18,7 @@ This section will go through setting up your project for a Modern Web Applicatio
 - Automatic TS Interface generation for ViewModels
 - Use of Yarn instead of NPM to allow for fully disconnected Builds in VSTS/TFS2017
 - Kendo Angular integration (Only for builds, no demo code implemented)
+- Component Level Unit Testing (E2E Comming Soon)
 
 ## How to build from scratch
 
