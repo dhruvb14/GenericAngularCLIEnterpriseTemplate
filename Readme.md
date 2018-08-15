@@ -665,7 +665,7 @@ Create file in Middleware folder named `IBrownbagRoleProvider.cs` with following
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
-using Brownbag.Web.Models;
+using Models;
 
 namespace Brownbag.Web.Middleware
 {
@@ -686,7 +686,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Brownbag.Data.Models;
 using Brownbag.Web.Middleware;
-using Brownbag.Web.Models;
+using Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Brownbag.Web.Middleware {
@@ -784,7 +784,7 @@ using System.Security.Claims;
 using AutoMapper;
 using Brownbag.Data.Models;
 using Brownbag.Web.Middleware;
-using Brownbag.Web.Models;
+using Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -992,8 +992,8 @@ Create file in Controllers folder named `BlogController.cs` with following conte
 using AutoMapper;
 using Brownbag.Data.Models;
 using Brownbag.Web.Extensions;
-using Brownbag.Web.Models;
-using Brownbag.Web.Models.PrimeNG.Grid;
+using Models;
+using Models.PrimeNG.Grid;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -1126,8 +1126,8 @@ Create file in Controllers folder named `BlogViewController.cs` with following c
 using AutoMapper;
 using Brownbag.Data.Models;
 using Brownbag.Web.Extensions;
-using Brownbag.Web.Models;
-using Brownbag.Web.Models.PrimeNG.Grid;
+using Models;
+using Models.PrimeNG.Grid;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -1260,7 +1260,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Brownbag.Data.Models;
-using Brownbag.Web.Models;
+using Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Brownbag.Web.Controllers {
@@ -1294,8 +1294,8 @@ Create file in Controllers folder named `PostController.cs` with following conte
 using AutoMapper;
 using Brownbag.Data.Models;
 using Brownbag.Web.Extensions;
-using Brownbag.Web.Models;
-using Brownbag.Web.Models.PrimeNG.Grid;
+using Models;
+using Models.PrimeNG.Grid;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -1586,7 +1586,7 @@ Create file in Models folder named `PostViewModel.cs` with following content:
 using Brownbag.Data.Models;
 using Reinforced.Typings.Attributes;
 
-namespace Brownbag.Web.Models {
+namespace Models {
     [TsInterface (AutoI = false)]
     public class PostViewModel {
         public int Id { get; set; }
@@ -1610,7 +1610,7 @@ using Brownbag.Web.Middleware;
 using System.Collections.Generic;
 using Reinforced.Typings.Attributes;
 
-namespace Brownbag.Web.Models
+namespace Models
 {
     [TsInterface(AutoI = false)]
     public class BlogViewModel
@@ -1629,7 +1629,7 @@ Create file in Models folder named `WeatherForecast.cs` with following content:
 ```Csharp
 using Reinforced.Typings.Attributes;
 
-namespace Brownbag.Web.Models
+namespace Models
 {
     [TsInterface(AutoI=false)]
     public class WeatherForecast
@@ -1648,7 +1648,7 @@ Create file in Models folder named `BlogPostsViewModel.cs` with following conten
 using System;
 using Reinforced.Typings.Attributes;
 
-namespace Brownbag.Web.Models {
+namespace Models {
     [TsInterface (AutoI = false)]
     public class BlogPostsViewModel : PostViewModel {
         public UsersViewModel CreatedByUser { get; set; }
@@ -1665,7 +1665,7 @@ Create file in Models folder named `GuidLookupViewModel.cs` with following conte
 using System;
 using Reinforced.Typings.Attributes;
 
-namespace Brownbag.Web.Models
+namespace Models
 {
     [TsInterface (AutoI = false)]    
     public class GuidLookupViewModel
@@ -1681,7 +1681,7 @@ Create file in Models folder named `LookupViewModel.cs` with following content:
 ```Csharp
 using Reinforced.Typings.Attributes;
 
-namespace Brownbag.Web.Models
+namespace Models
 {
     [TsInterface (AutoI = false)]
     public class LookupViewModel
@@ -1697,7 +1697,7 @@ Create file in Models folder named `UsersViewModel.cs` with following content:
 ```Csharp
 using Reinforced.Typings.Attributes;
 
-namespace Brownbag.Web.Models
+namespace Models
 {
     [TsInterface (AutoI = false)]
     public class UsersViewModel
@@ -1712,7 +1712,7 @@ Create file in Models folder named `PrimeNG/Grid/GridPaginator.cs` with followin
 ```Csharp
 using Reinforced.Typings.Attributes;
 
-namespace Brownbag.Web.Models.PrimeNG.Grid
+namespace Models.PrimeNG.Grid
 {
     [TsInterface(AutoI=false)]
     public class GridPaginator
@@ -1743,7 +1743,7 @@ Create file in Models folder named `PrimeNG/Grid/GridViewModel.cs` with followin
 ```Csharp
 using Reinforced.Typings.Attributes;
 
-namespace Brownbag.Web.Models.PrimeNG.Grid
+namespace Models.PrimeNG.Grid
 {
     [TsInterface(AutoI=false)]
     public class GridViewModel<T> : GridPaginator
@@ -1768,7 +1768,7 @@ Create file in Automapper folder named `BrownbagMappingProfile.cs` with followin
 
 ```Csharp
 using Brownbag.Data.Models;
-using Brownbag.Web.Models;
+using Models;
 
 namespace Brownbag.Web.Automapper
 {
@@ -1838,10 +1838,10 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './fetch-data.component.html'
 })
 export class FetchDataComponent {
-  public forecasts: Brownbag.Web.Models.WeatherForecast[];
+  public forecasts: Models.WeatherForecast[];
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Brownbag.Web.Models.WeatherForecast[]>(baseUrl + 'api/SampleData/WeatherForecasts').subscribe(result => {
+    http.get<Models.WeatherForecast[]>(baseUrl + 'api/SampleData/WeatherForecasts').subscribe(result => {
       this.forecasts = result;
     }, error => console.error(error));
   }
@@ -1994,7 +1994,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import { GridRestCallsBaseService } from './grid-base-rest.service';
 
 export abstract class GridComponentBaseService<T> {
-    public state: Brownbag.Web.Models.PrimeNG.Grid.GridViewModel<T>;
+    public state: Models.PrimeNG.Grid.GridViewModel<T>;
     public displayDialog: boolean;
     public selectedGridItem: T;
     public isNew: boolean;
@@ -2032,7 +2032,7 @@ export abstract class GridComponentBaseService<T> {
         since baseclass uses ANY as the type and we
         want strong typing
         */
-        this.state = <Brownbag.Web.Models.PrimeNG.Grid.GridViewModel<T>>{};
+        this.state = <Models.PrimeNG.Grid.GridViewModel<T>>{};
     }
     showDialogToAdd() {
         this.editErrors = undefined;
@@ -2066,7 +2066,7 @@ export abstract class GridComponentBaseService<T> {
     }
     getGridData(optionalHttpParams?: { param: string, value: string }[]) {
         // tslint:disable-next-line:max-line-length
-        this.gridService.getGrid<Brownbag.Web.Models.PrimeNG.Grid.GridViewModel<T>>(this.state.Page || undefined, this.state.Rows || undefined, this.state.SearchQuery || undefined, optionalHttpParams || undefined)
+        this.gridService.getGrid<Models.PrimeNG.Grid.GridViewModel<T>>(this.state.Page || undefined, this.state.Rows || undefined, this.state.SearchQuery || undefined, optionalHttpParams || undefined)
             .subscribe(
                 result => {
                     if (result != null) {
@@ -2163,7 +2163,7 @@ export class LookupsService {
     constructor(private http: HttpClient) {
     }
     getBlogs() {
-        return this.http.get<Brownbag.Web.Models.LookupViewModel[]>(this.baseUrl + '/Blogs');
+        return this.http.get<Models.LookupViewModel[]>(this.baseUrl + '/Blogs');
     }
 }
 
@@ -2205,7 +2205,7 @@ import { BlogService } from './blog.service';
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.css']
 })
-export class BlogComponent extends GridComponentBaseService<Brownbag.Web.Models.BlogViewModel> implements OnInit {
+export class BlogComponent extends GridComponentBaseService<Models.BlogViewModel> implements OnInit {
   public PostsCols: any[];
   constructor(gridService: BlogService, notificationsService: AdvGrowlService) {
 
@@ -2384,8 +2384,8 @@ import { BlogViewService } from './blog-view.service';
   templateUrl: './blog-view.component.html',
   styleUrls: ['./blog-view.component.css']
 })
-export class BlogViewComponent extends GridComponentBaseService<Brownbag.Web.Models.BlogPostsViewModel> implements OnInit {
-  public BlogLookups: Brownbag.Web.Models.LookupViewModel[];
+export class BlogViewComponent extends GridComponentBaseService<Models.BlogPostsViewModel> implements OnInit {
+  public BlogLookups: Models.LookupViewModel[];
   public CurrentBlogId = 1;
   constructor(private lookupsService: LookupsService, gridService: BlogViewService, notificationsService: AdvGrowlService) {
 
@@ -2503,8 +2503,8 @@ import { PostService } from './post.service';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
 })
-export class PostComponent extends GridComponentBaseService<Brownbag.Web.Models.PostViewModel> implements OnInit {
-  public BlogLookups: Brownbag.Web.Models.LookupViewModel[];
+export class PostComponent extends GridComponentBaseService<Models.PostViewModel> implements OnInit {
+  public BlogLookups: Models.LookupViewModel[];
 
   constructor(private lookupsService: LookupsService, gridService: PostService, notificationsService: AdvGrowlService) {
 

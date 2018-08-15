@@ -3,7 +3,7 @@ using System.Security.Claims;
 using AutoMapper;
 using Brownbag.Data.Models;
 using Brownbag.Web.Middleware;
-using Brownbag.Web.Models;
+using Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

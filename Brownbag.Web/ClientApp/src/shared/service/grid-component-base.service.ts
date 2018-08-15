@@ -6,7 +6,7 @@ import { GridRestCallsBaseService } from './grid-base-rest.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 export abstract class GridComponentBaseService<T> {
-    public state: Brownbag.Web.Models.PrimeNG.Grid.GridViewModel<T>;
+    public state: Models.PrimeNG.Grid.GridViewModel<T>;
     public displayDialog: boolean;
     public selectedGridItem: T;
     public isNew: boolean;
@@ -44,7 +44,7 @@ export abstract class GridComponentBaseService<T> {
         since baseclass uses ANY as the type and we
         want strong typing
         */
-        this.state = <Brownbag.Web.Models.PrimeNG.Grid.GridViewModel<T>>{};
+        this.state = <Models.PrimeNG.Grid.GridViewModel<T>>{};
     }
     showDialogToAdd() {
         this.editErrors = undefined;
@@ -78,7 +78,7 @@ export abstract class GridComponentBaseService<T> {
     }
     getGridData(optionalHttpParams?: { param: string, value: string }[]) {
         // tslint:disable-next-line:max-line-length
-        this.gridService.getGrid<Brownbag.Web.Models.PrimeNG.Grid.GridViewModel<T>>(this.state.Page || undefined, this.state.Rows || undefined, this.state.SearchQuery || undefined, optionalHttpParams || undefined)
+        this.gridService.getGrid<Models.PrimeNG.Grid.GridViewModel<T>>(this.state.Page || undefined, this.state.Rows || undefined, this.state.SearchQuery || undefined, optionalHttpParams || undefined)
             .subscribe(
                 result => {
                     if (result != null) {

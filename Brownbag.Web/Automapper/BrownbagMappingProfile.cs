@@ -1,5 +1,5 @@
 using Brownbag.Data.Models;
-using Brownbag.Web.Models;
+using Models;
 
 namespace Brownbag.Web.Automapper
 {

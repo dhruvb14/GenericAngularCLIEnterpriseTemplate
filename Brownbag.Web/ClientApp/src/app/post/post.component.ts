@@ -9,8 +9,8 @@ import { PostService } from './post.service';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
 })
-export class PostComponent extends GridComponentBaseService<Brownbag.Web.Models.PostViewModel> implements OnInit {
-  public BlogLookups: Brownbag.Web.Models.LookupViewModel[];
+export class PostComponent extends GridComponentBaseService<Models.PostViewModel> implements OnInit {
+  public BlogLookups: Models.LookupViewModel[];
 
   constructor(private lookupsService: LookupsService, gridService: PostService, notificationsService: AdvGrowlService) {
 

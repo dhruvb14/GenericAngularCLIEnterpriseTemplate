@@ -27,7 +27,7 @@ describe('BlogViewComponent', () => {
   const mockLookupService = jasmine.createSpyObj('mockLookupService', ['getBlogs']);
   const mockBlogViewService = jasmine.createSpyObj('mockBlogViewService', ['getGrid']);
   const mockAdvGrowlService = jasmine.createSpyObj('mockAdvGrowlService', ['createSuccessMessage']);
-  const afrTypesResponse: Brownbag.Web.Models.LookupViewModel[] = [
+  const afrTypesResponse: Models.LookupViewModel[] = [
     { 'ID': 1, 'Value': 'google.com' },
     { 'ID': 2, 'Value': 'apple.com' }
   ];
