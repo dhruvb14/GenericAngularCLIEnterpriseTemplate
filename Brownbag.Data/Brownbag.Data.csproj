@@ -1,18 +1,16 @@
   <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-      <TargetFramework>netcoreapp2.0</TargetFramework>
+      <TargetFramework>netcoreapp2.1</TargetFramework>
       <Configurations>Debug;Release;Integrated</Configurations>
       <RuntimeFrameworkVersion>2.0.6</RuntimeFrameworkVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.2" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.2" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" />
-      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
-      <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
-
+      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.2" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1" />
+      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
     </ItemGroup>
 
     <ItemGroup>
