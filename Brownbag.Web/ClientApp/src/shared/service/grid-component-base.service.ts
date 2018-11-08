@@ -4,9 +4,11 @@ import { Subject } from 'rxjs';
 
 import { GridRestCallsBaseService } from './grid-base-rest.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { UserService } from './user.service';
+import { BaseService } from './base.service';
 
-export abstract class GridComponentBaseService<T> {
-    public state: Brownbag.Web.Models.PrimeNG.Grid.GridViewModel<T>;
+export abstract class GridComponentBaseService<T> extends BaseService {
+    public state: Models.PrimeNG.Grid.GridViewModel<T>;
     public displayDialog: boolean;
     public selectedGridItem: T;
     public isNew: boolean;
@@ -14,23 +16,27 @@ export abstract class GridComponentBaseService<T> {
     public searchQueryDebouncer: Subject<string> = new Subject<string>();
 
     // These are the default titles used if you do not override them in implementation
-    public entityTitleSingular = 'Generic Entity';
-    public entityTitlePlural = 'Generic Entities';
+    public abstract entityTitleSingular: string;
+    public abstract entityTitlePlural: string;
     /*
     This constructor expects a service handed to it which knows about the correct endpoints
     to communicate with. For examples look at the admin folder as all services in there
     are setup to use this grid base class correctly.
     */
-    constructor(public gridService: GridRestCallsBaseService, public notificationsService: AdvGrowlService) {
+    constructor(
+        public gridService: GridRestCallsBaseService,
+        public notificationsService: AdvGrowlService,
+        public userService: UserService) {
+        super();
         /*
-        How to debounce search queries in angular without touch @angular/forms
-        https://stackoverflow.com/a/40777621
-        This SearchQueryDebouncer doesnt fire off search queries until after 500ms
-        this helps reduce database load. It is not important for local but will be
-        once we move to server client setup. This does NOT however deal with problems
-        related to a query which was fired first returning second and overwriting the
-        results of the correct (second) query.
-        */
+             How to debounce search queries in angular without touch @angular/forms
+             https://stackoverflow.com/a/40777621
+             This SearchQueryDebouncer doesnt fire off search queries until after 500ms
+             this helps reduce database load. It is not important for local but will be
+             once we move to server client setup. This does NOT however deal with problems
+             related to a query which was fired first returning second and overwriting the
+             results of the correct (second) query.
+             */
         this.searchQueryDebouncer
             .pipe(debounceTime(500)) // wait 500ms after the last event before emitting last event
             .pipe(distinctUntilChanged()) // only emit if value is different from previous value
@@ -44,7 +50,7 @@ export abstract class GridComponentBaseService<T> {
         since baseclass uses ANY as the type and we
         want strong typing
         */
-        this.state = <Brownbag.Web.Models.PrimeNG.Grid.GridViewModel<T>>{};
+        this.state = <Models.PrimeNG.Grid.GridViewModel<T>>{};
     }
     showDialogToAdd() {
         this.editErrors = undefined;
@@ -63,7 +69,7 @@ export abstract class GridComponentBaseService<T> {
         this.selectedGridItem = this.clone(event.data);
         // Below check is to see if the data has already been fetched in previous
         // Call, if already in the selectd plan no need to refetch data
-        this.gridService.getGridItemDetails<T>((<any>this.selectedGridItem).Id)
+        this.gridService.getGridItemDetails<T>((<any>this.selectedGridItem).ID || (<any>this.selectedGridItem).Id)
             .subscribe(
                 result => {
                     if (result != null) {
@@ -73,12 +79,12 @@ export abstract class GridComponentBaseService<T> {
                 },
                 error => {
                     this.state.Errors = error;
-                    this.notificationsService.createErrorMessage(error, 'Error!', 0);
+                    this.handleError(error);
                 });
     }
     getGridData(optionalHttpParams?: { param: string, value: string }[]) {
         // tslint:disable-next-line:max-line-length
-        this.gridService.getGrid<Brownbag.Web.Models.PrimeNG.Grid.GridViewModel<T>>(this.state.Page || undefined, this.state.Rows || undefined, this.state.SearchQuery || undefined, optionalHttpParams || undefined)
+        this.gridService.getGrid<Models.PrimeNG.Grid.GridViewModel<T>>(this.state.Page || undefined, this.state.Rows || undefined, this.state.SearchQuery || undefined, optionalHttpParams || undefined)
             .subscribe(
                 result => {
                     if (result != null) {
@@ -87,7 +93,7 @@ export abstract class GridComponentBaseService<T> {
                 },
                 error => {
                     this.state.Errors = error;
-                    this.notificationsService.createErrorMessage(error, 'Error!', 0);
+                    this.handleError(error);
                 });
     }
     searchDebouncer(text: string) {
@@ -127,21 +133,26 @@ export abstract class GridComponentBaseService<T> {
     */
     save(formData: T) {
         this.editErrors = undefined;
-        this.gridService.updateGridItem<T>(formData)
-            .subscribe(
-                result => {
-                    if (result != null && !this.editErrors) {
-                        this.displayDialog = false;
-                        this.selectedGridItem = undefined;
-                        this.editErrors = undefined;
-                        this.notificationsService.createSuccessMessage('Save Successful', '');
-                        this.getGridData();
-                    }
-                },
-                error => {
-                    this.editErrors = error;
-                    this.notificationsService.createErrorMessage(error, 'Error!', 0);
-                });
+        let dataCall;
+        if ((<any>formData).ID || (<any>formData).Id) {
+            dataCall = this.gridService.updateGridItem<T>(formData);
+        } else {
+            dataCall = this.gridService.createGridItem<T>(formData);
+        }
+        dataCall.subscribe(
+            result => {
+                if (result != null && !this.editErrors) {
+                    this.displayDialog = false;
+                    this.selectedGridItem = undefined;
+                    this.editErrors = undefined;
+                    this.notificationsService.createSuccessMessage('Save Successful', '');
+                    this.getGridData();
+                }
+            },
+            error => {
+                this.editErrors = error;
+                this.handleError(error);
+            });
     }
 
     close() {

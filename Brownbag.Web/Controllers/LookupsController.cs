@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Brownbag.Data.Models;
-using Brownbag.Web.Models;
+using Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Brownbag.Web.Controllers {

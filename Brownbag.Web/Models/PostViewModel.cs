@@ -1,7 +1,7 @@
 using Brownbag.Data.Models;
 using Reinforced.Typings.Attributes;
 
-namespace Brownbag.Web.Models {
+namespace Models {
     [TsInterface (AutoI = false)]
     public class PostViewModel {
         public int Id { get; set; }

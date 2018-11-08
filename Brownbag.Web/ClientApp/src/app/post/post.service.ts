@@ -4,9 +4,8 @@ import { GridRestCallsBaseService } from '../../shared/service/grid-base-rest.se
 
 @Injectable()
 export class PostService extends GridRestCallsBaseService {
+    endpoint = '/Post/';
     constructor(http: HttpClient) {
         super(http);
-        this.baseUrl = '/api';
-        this.endpoint = '/Post/';
     }
 }

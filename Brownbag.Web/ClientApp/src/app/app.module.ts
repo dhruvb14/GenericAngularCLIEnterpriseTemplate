@@ -27,6 +27,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { PostComponent } from './post/post.component';
 import { PostService } from './post/post.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserService } from '../shared/service/user.service';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       { path: 'blogview', component: BlogViewComponent },
     ]),
   ],
-  providers: [BlogService, BlogViewService, PostService, LookupsService],
+  providers: [BlogService, BlogViewService, PostService, LookupsService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,9 +4,8 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class BlogService extends GridRestCallsBaseService {
+    endpoint = '/Blog/';
     constructor(http: HttpClient) {
         super(http);
-        this.baseUrl = '/api';
-        this.endpoint = '/Blog/';
     }
 }

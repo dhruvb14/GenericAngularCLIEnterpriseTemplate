@@ -2,11 +2,11 @@
 //     Changes to this file may cause incorrect behavior and will be lost if
 //     the code is regenerated.
 
-module Brownbag.Web.Models {
-	export interface BlogPostsViewModel extends Brownbag.Web.Models.PostViewModel
+module Models {
+	export interface BlogPostsViewModel extends Models.PostViewModel
 	{
-		CreatedByUser: Brownbag.Web.Models.UsersViewModel;
-		UpdatedByUser: Brownbag.Web.Models.UsersViewModel;
+		CreatedByUser: Models.UsersViewModel;
+		UpdatedByUser: Models.UsersViewModel;
 		CreatedDate: any;
 		UpdatedDate: any;
 	}
@@ -15,7 +15,7 @@ module Brownbag.Web.Models {
 		Id: number;
 		Url: string;
 		Rating: number;
-		Posts: Brownbag.Web.Models.PostViewModel[];
+		Posts: Models.PostViewModel[];
 	}
 	export interface GuidLookupViewModel
 	{
@@ -47,7 +47,7 @@ module Brownbag.Web.Models {
 		Summary: string;
 	}
 }
-module Brownbag.Web.Models.PrimeNG.Grid {
+module Models.PrimeNG.Grid {
 	export interface GridPaginator
 	{
 		First: number;
@@ -55,7 +55,7 @@ module Brownbag.Web.Models.PrimeNG.Grid {
 		PageCount: number;
 		Rows: number;
 	}
-	export interface GridViewModel<T> extends Brownbag.Web.Models.PrimeNG.Grid.GridPaginator
+	export interface GridViewModel<T> extends Models.PrimeNG.Grid.GridPaginator
 	{
 		Data: T[];
 		Errors: string;

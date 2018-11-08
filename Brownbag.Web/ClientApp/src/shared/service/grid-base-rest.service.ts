@@ -10,8 +10,8 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export abstract class GridRestCallsBaseService extends BaseService {
 
-    baseUrl = '';
-    endpoint = '';
+    public baseUrl = 'api';
+    public abstract endpoint: string;
 
     constructor(public http: HttpClient) {
         super();
@@ -38,13 +38,18 @@ export abstract class GridRestCallsBaseService extends BaseService {
             });
         }
         return this.http.get<T>((this.baseUrl + this.endpoint), { params: myParams })
-        .pipe(catchError( err => this.handleError(err)));
+            .pipe(catchError(err => this.handleError(err)));
     }
     getGridItemDetails<T>(id: string): Observable<T> {
         return this.http.get<T>((this.baseUrl + this.endpoint + id))
-        .pipe(catchError( err => this.handleError(err)));
+            .pipe(catchError(err => this.handleError(err)));
     }
     updateGridItem<T>(entity: T) {
         return this.http.put(this.baseUrl + this.endpoint, entity)
-        .pipe(catchError( err => this.handleError(err)));    }
+            .pipe(catchError(err => this.handleError(err)));
+    }
+    createGridItem<T>(entity: T) {
+        return this.http.post(this.baseUrl + this.endpoint, entity)
+            .pipe(catchError(err => this.handleError(err)));
+    }
 }

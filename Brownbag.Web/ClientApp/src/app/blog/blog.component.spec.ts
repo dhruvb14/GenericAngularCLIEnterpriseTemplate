@@ -20,12 +20,14 @@ import { Observable, of } from 'rxjs';
 import { BlogComponent } from './blog.component';
 import { BlogService } from './blog.service';
 import { BlogData } from './blog.data';
+import { UserService } from '../../shared/service/user.service';
 
 describe('BlogComponent', () => {
   let component: BlogComponent;
   let fixture: ComponentFixture<BlogComponent>;
   const mockAdvGrowlService = jasmine.createSpyObj('mockAdvGrowlService', ['createSuccessMessage']);
   const mockBlogViewService = jasmine.createSpyObj('mockBlogViewService', ['getGrid']);
+  const mockUserService = jasmine.createSpyObj('mockUserService', ['']);
 
   beforeEach(async(() => {
     mockBlogViewService.getGrid.and.returnValue(of(BlogData));
@@ -49,6 +51,7 @@ describe('BlogComponent', () => {
       providers: [
         { provide: BlogService, useValue: mockBlogViewService },
         { provide: AdvGrowlService, useValue: mockAdvGrowlService },
+        { provide: UserService, useValue: mockUserService },
       ]
     })
       .compileComponents();

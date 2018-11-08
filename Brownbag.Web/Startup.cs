@@ -3,7 +3,7 @@ using System.Security.Claims;
 using AutoMapper;
 using Brownbag.Data.Models;
 using Brownbag.Web.Middleware;
-using Brownbag.Web.Models;
+using Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -107,6 +107,14 @@ namespace Brownbag.Web {
                 }
             });
             app.UseAuthentication ();
+            try {
+                using(var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+                    .CreateScope()) {
+                    serviceScope.ServiceProvider.GetService<ApplicationDataContext>().Database.Migrate();
+                }
+            } catch (Exception ex) {
+                Console.WriteLine(ex.ToString(), "Failed to migrate or seed database");
+            }
         }
     }
 }
