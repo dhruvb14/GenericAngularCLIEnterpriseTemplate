@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -28,6 +28,8 @@ import { PostComponent } from './post/post.component';
 import { PostService } from './post/post.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../shared/service/user.service';
+import { AuthGuardService } from '../shared/service/auth-guard.service';
+import { HttpRequestInterceptor } from '../shared/service/http-request.interceptor';
 
 @NgModule({
   declarations: [
@@ -58,14 +60,40 @@ import { UserService } from '../shared/service/user.service';
     AdvGrowlModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'blog', component: BlogComponent },
-      { path: 'post', component: PostComponent },
-      { path: 'blogview', component: BlogViewComponent },
+      {
+        path: 'counter', component: CounterComponent, canActivate: [AuthGuardService],
+        data: { roles: ['Developer'] }
+      },
+      {
+        path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthGuardService],
+        data: { roles: ['Developer'] }
+      },
+      {
+        path: 'blog', component: BlogComponent, canActivate: [AuthGuardService],
+        data: { roles: ['Administrator'] }
+      },
+      {
+        path: 'post', component: PostComponent, canActivate: [AuthGuardService],
+        data: { roles: ['Administrator'] }
+      },
+      {
+        path: 'blogview', component: BlogViewComponent, canActivate: [AuthGuardService],
+        data: { roles: ['Administrator'] }
+      },
     ]),
   ],
-  providers: [BlogService, BlogViewService, PostService, LookupsService, UserService],
+
+  providers: [BlogService,
+    BlogViewService,
+    PostService,
+    LookupsService,
+    UserService,
+    AuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

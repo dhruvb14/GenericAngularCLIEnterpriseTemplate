@@ -23,7 +23,7 @@ namespace Brownbag.Web.Controllers
         [Route("api/account/user")]
         public ActionResult GetRoles()
         {
-            return Json(new { name = User.Identity.Name, roles = BrownbagRoleProvider.GetRolesForUser(User.Identity.Name) });
+            return Json(new { name = User.Identity.Name, roles = BrownbagRoleProvider.GetRolesForUser(User.Identity.Name), id = User.FindFirst("userId").Value });
         }
     }
 }

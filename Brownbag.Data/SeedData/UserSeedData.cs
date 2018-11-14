@@ -34,6 +34,12 @@ namespace Bom.Data {
                     Name = "Administrator",
                     NormalizedName = "ADMINISTRATOR",
                     ConcurrencyStamp = "d6775817-bb1a-4d77-8ed7-1d430c91d7f1"
+                },
+                new IdentityRole<Guid> {
+                    Id = Guid.Parse("2c91c203-6dc2-4428-87fb-cc60a5300f71"),
+                    Name = "Developer",
+                    NormalizedName = "DEVELOPER",
+                    ConcurrencyStamp = "d6775817-bb1a-4d77-8ed7-1d430c91d7f1"
                 }
             );
              modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(
@@ -44,6 +50,10 @@ namespace Bom.Data {
                 new IdentityUserRole<Guid> {
                     UserId = Guid.Parse("2c91c203-6dc2-4428-87fb-cc60a5300f72"),
                     RoleId = Guid.Parse("2c91c203-6dc2-4428-87fb-cc60a5300f78")
+                },
+                 new IdentityUserRole<Guid> {
+                    UserId = Guid.Parse("2c91c203-6dc2-4428-87fb-cc60a5300f72"),
+                    RoleId = Guid.Parse("2c91c203-6dc2-4428-87fb-cc60a5300f71")
                 }
             );
         }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Router, NavigationEnd } from '@angular/router';
+import { UserService } from '../../shared/service/user.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -10,4 +11,7 @@ import { Router, NavigationEnd } from '@angular/router';
 export class NavMenuComponent {
   navbarCollapsed: Boolean;
   readonly baseURL = environment.apiUrl;
+  constructor(public userService: UserService) {
+
+  }
 }
