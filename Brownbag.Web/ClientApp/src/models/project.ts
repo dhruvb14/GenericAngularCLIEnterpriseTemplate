@@ -10,6 +10,11 @@ module Models {
 		CreatedDate: any;
 		UpdatedDate: any;
 	}
+	export interface BlogFKViewModel extends Models.BlogViewModel
+	{
+		WeatherID: number;
+		WeatherCityName: string;
+	}
 	export interface BlogViewModel
 	{
 		Id: number;

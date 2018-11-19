@@ -16,6 +16,8 @@ import { RatingModule } from 'primeng/rating';
 import { TableModule } from 'primeng/table';
 import { LookupsService } from '../shared/service/lookups.service';
 import { AppComponent } from './app.component';
+import { BlogFKComponent } from './blog-fk/blog-fk.component';
+import { BlogFKService } from './blog-fk/blog-fk.service';
 import { BlogViewComponent } from './blog-view/blog-view.component';
 import { BlogViewService } from './blog-view/blog-view.service';
 import { BlogComponent } from './blog/blog.component';
@@ -40,7 +42,8 @@ import { HttpRequestInterceptor } from '../shared/service/http-request.intercept
     FetchDataComponent,
     BlogComponent,
     PostComponent,
-    BlogViewComponent
+    BlogViewComponent,
+    BlogFKComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -80,11 +83,16 @@ import { HttpRequestInterceptor } from '../shared/service/http-request.intercept
         path: 'blogview', component: BlogViewComponent, canActivate: [AuthGuardService],
         data: { roles: ['Administrator'] }
       },
+      {
+        path: 'blogviewfk', component: BlogFKComponent, canActivate: [AuthGuardService],
+        data: { roles: ['Administrator'] }
+      },
     ]),
   ],
 
   providers: [BlogService,
     BlogViewService,
+    BlogFKService,
     PostService,
     LookupsService,
     UserService,
