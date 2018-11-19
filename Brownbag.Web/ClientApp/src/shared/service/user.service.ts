@@ -35,6 +35,11 @@ export class UserService extends BehaviorSubject<UserModel> {
             return (role == null || user.roles.filter(r => role === r).length > 0);
         }));
     }
+    getUserName(): Observable<string> {
+        return this.user.pipe(map(user => {
+            return user.name;
+        }));
+    }
 
     isUserInList(guidList: Models.GuidLookupViewModel[]): Observable<boolean> {
         return this.user.pipe(map(user => {

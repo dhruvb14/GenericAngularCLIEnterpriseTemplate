@@ -12,8 +12,8 @@ export class AppComponent implements OnInit {
   title = 'Brownbag';
   footer = new Date().getFullYear() + ' Brownbag';
   public user: Observable<UserModel>;
-  constructor(private router: Router, userService: UserService) {
-    this.user = userService;
+  constructor(private router: Router, public userService: UserService) {
+    this.user = userService.user;
   }
   ngOnInit() {
     // This is so anytime you click a link it takes you to the top of the page

@@ -39,6 +39,7 @@ export class BlogViewComponent extends GridComponentBaseService<Models.BlogPosts
   getGridData() {
     super.getGridData([{ param: 'blogId', value: this.CurrentBlogId.toString() }]);
   }
+
   ngOnInit() {
     this.initilizeLookups();
     this.notificationsService.createSuccessMessage('Init Success', 'Blog View Component');

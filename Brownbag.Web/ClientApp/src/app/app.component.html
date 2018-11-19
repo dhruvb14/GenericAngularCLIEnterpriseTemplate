@@ -2,12 +2,13 @@
 <div class="container-fluid">
   <router-outlet></router-outlet>
   <adv-growl [life]="3000" freezeMessagesOnHover="true"></adv-growl>
+  <span class="fa fa-spin fa-5x"></span>
   <hr />
 </div>
 <!--FORCE FOOTER Z-INDEX TO MAKE SURE ITS ALWAYS ONTOP-->
 <footer class="footer" style="z-index:15000">
   <div class="container-fluid">
     <span class="text-muted">&copy; {{footer}}</span>
-    <span class="text-muted pull-right">USERNAME HERE</span>
+    <span class="text-muted pull-right">{{ userService.getUserName() | async }}</span>
   </div>
 </footer>
