@@ -11,4 +11,7 @@ export class LookupsService {
     getBlogs() {
         return this.http.get<Models.LookupViewModel[]>(this.baseUrl + '/Blogs');
     }
+    getRoles() {
+        return this.http.get<Models.StringOptionsLookupViewModel[]>(this.baseUrl + '/Roles');
+    }
 }

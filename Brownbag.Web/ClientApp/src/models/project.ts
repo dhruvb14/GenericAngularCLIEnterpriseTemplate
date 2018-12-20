@@ -32,6 +32,18 @@ module Models {
 		ID: number;
 		Value: string;
 	}
+	export interface OptionsLookupViewModel
+	{
+		label: string;
+		value: number;
+		disabled: boolean;
+	}
+	export interface StringOptionsLookupViewModel
+	{
+		label: string;
+		value: string;
+		disabled: boolean;
+	}
 	export interface PostViewModel
 	{
 		Id: number;
@@ -42,7 +54,11 @@ module Models {
 	}
 	export interface UsersViewModel
 	{
+		Id: string;
+		UserName: string;
 		UserFullName: string;
+		Roles: Models.StringOptionsLookupViewModel[];
+		Active: boolean;
 	}
 	export interface WeatherForecastViewModel
 	{

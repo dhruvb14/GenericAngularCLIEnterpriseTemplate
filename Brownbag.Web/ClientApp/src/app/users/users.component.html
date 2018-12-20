@@ -1,0 +1,98 @@
+<h2>{{entityTitlePlural}}</h2>
+<div *ngIf="state.Errors" class="alert alert-danger" role="alert">
+  <strong>Oops!</strong>
+  <pre>{{state.Errors}}</pre>
+</div>
+<div class="row">
+  <div class="col-12">
+    <p-table #dt [value]="state.Data" [rows]="state.Rows" selectionMode="single" [(selection)]="selectedGridItem"
+      (onRowSelect)="onRowSelect($event)">
+      <ng-template pTemplate="caption">
+        <div style="text-align: right">
+          <button *ngIf="userService.isInRole('CanCreateLookups')" type="button" style="text-align:left" class="pull-left"
+            (click)="showDialogToAdd()" label="Add">
+            <i class="fa fa-plus"></i> Add {{entityTitleSingular}}</button>
+          <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+          <input type="text" pInputText size="50" placeholder="Global Filter" [ngModel]='state.SearchQuery'
+            (ngModelChange)="searchDebouncer($event)" style="width:auto">
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngIf="userService.isInRole('IsDeveloper')">ID</th>
+          <th>Full Name</th>
+          <th>UserName</th>
+          <th>Permissions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-selectedGridItem>
+        <tr [pSelectableRow]="selectedGridItem">
+          <td *ngIf="userService.isInRole('IsDeveloper')">{{selectedGridItem.Id}}</td>
+          <td>{{selectedGridItem.UserFullName}}</td>
+          <td>{{selectedGridItem.UserName}}</td>
+          <td>
+            <div *ngFor="let claim of selectedGridItem.Roles">{{claim.label}}</div>
+          </td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+    <p-paginator rows="10" [totalRecords]="state.PageCount * state.Rows" (onPageChange)="paginate($event)"
+      [rowsPerPageOptions]="[10,20,30,40,50]"></p-paginator>
+  </div>
+</div>
+<p-dialog header="{{isNew ? 'Add':'Edit'}} {{entityTitleSingular}}" [(visible)]="displayDialog" *ngIf="selectedGridItem"
+  [responsive]="true" showEffect="fade" [modal]="true" [width]="700">
+  <div *ngIf="editErrors" class="alert alert-danger" role="alert">
+    <strong>Oops!</strong>
+    <pre>{{editErrors}}</pre>
+  </div>
+  <form #formEdit="ngForm" (ngSubmit)="save(selectedGridItem)">
+    <div class="ui-g ui-fluid" *ngIf="selectedGridItem">
+      <div class="ui-g-12" *ngIf="userService.isInRole('IsDeveloper')">
+        <div class="ui-g-4">
+          Id
+        </div>
+        <div class="ui-g-8">
+          <input type="text" size="50" name="ID" class="form-control" readonly [(ngModel)]="selectedGridItem.Id">
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          User Full Name
+        </div>
+        <div class="ui-g-8">
+          <input type="text" size="50" name="UserFullName" class="form-control" required [(ngModel)]="selectedGridItem.UserFullName">
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          UserName
+        </div>
+        <div class="ui-g-8">
+          <input type="text" size="50" name="UserName" class="form-control" required [(ngModel)]="selectedGridItem.UserName">
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          Permissions
+        </div>
+        <div class="ui-g-8">
+          <p-listbox name="Roles" [options]="roles" multiple="multiple" checkbox="checkbox" filter="filter" [(ngModel)]="selectedGridItem.Roles"
+            optionLabel="label" dataKey="value" [listStyle]="{'max-height':'250px'}">
+          </p-listbox>
+        </div>
+      </div>
+    </div>
+    <p-footer *ngIf="selectedGridItem">
+      <div class="ui-dialog-buttonpane ui-helper-clearfix">
+        <button type="submit" [disabled]="!formEdit.form.valid" required class="btn btn-primary">
+          <span [ngClass]="isNew ? 'fa fa-plus' : 'fa fa-save'"></span> {{isNew ? 'Add ' + entityTitleSingular: 'Save' + entityTitleSingular}}
+        </button>
+        <button type="button" class="btn btn-danger" (click)="close()">
+          <span class="fa fa-close"></span> Close
+        </button>
+      </div>
+    </p-footer>
+  </form>
+</p-dialog>
