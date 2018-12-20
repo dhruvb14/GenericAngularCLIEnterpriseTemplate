@@ -1,8 +1,8 @@
 using AutoMapper;
 using Brownbag.Data.Models;
 using Brownbag.Web.Extensions;
-using Brownbag.Web.Models;
-using Brownbag.Web.Models.PrimeNG.Grid;
+using Models;
+using Models.PrimeNG.Grid;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;

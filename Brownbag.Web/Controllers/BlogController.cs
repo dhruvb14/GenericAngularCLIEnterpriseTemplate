@@ -1,11 +1,11 @@
 using AutoMapper;
 using Brownbag.Data.Models;
 using Brownbag.Web.Extensions;
-using Brownbag.Web.Models;
-using Brownbag.Web.Models.PrimeNG.Grid;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Models;
+using Models.PrimeNG.Grid;
 using System;
 using System.Collections.Generic;
 using System.Linq;

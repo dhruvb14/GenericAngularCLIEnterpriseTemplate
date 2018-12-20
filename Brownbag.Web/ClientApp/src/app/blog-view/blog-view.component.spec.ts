@@ -19,6 +19,7 @@ import { LookupsService } from '../../shared/service/lookups.service';
 import { BlogViewComponent } from './blog-view.component';
 import { blogViewGridData } from './blog-view.data';
 import { BlogViewService } from './blog-view.service';
+import { UserService } from '../../shared/service/user.service';
 
 
 describe('BlogViewComponent', () => {
@@ -27,7 +28,9 @@ describe('BlogViewComponent', () => {
   const mockLookupService = jasmine.createSpyObj('mockLookupService', ['getBlogs']);
   const mockBlogViewService = jasmine.createSpyObj('mockBlogViewService', ['getGrid']);
   const mockAdvGrowlService = jasmine.createSpyObj('mockAdvGrowlService', ['createSuccessMessage']);
-  const afrTypesResponse: Brownbag.Web.Models.LookupViewModel[] = [
+  const mockUserService = jasmine.createSpyObj('mockUserService', ['']);
+
+  const afrTypesResponse: Models.LookupViewModel[] = [
     { 'ID': 1, 'Value': 'google.com' },
     { 'ID': 2, 'Value': 'apple.com' }
   ];
@@ -56,6 +59,8 @@ describe('BlogViewComponent', () => {
         { provide: LookupsService, useValue: mockLookupService },
         { provide: BlogViewService, useValue: mockBlogViewService },
         { provide: AdvGrowlService, useValue: mockAdvGrowlService },
+        { provide: UserService, useValue: mockUserService },
+
       ]
     })
       .compileComponents();

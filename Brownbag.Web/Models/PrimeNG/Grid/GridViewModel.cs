@@ -1,6 +1,6 @@
 using Reinforced.Typings.Attributes;
 
-namespace Brownbag.Web.Models.PrimeNG.Grid
+namespace Models.PrimeNG.Grid
 {
     [TsInterface(AutoI=false)]
     public class GridViewModel<T> : GridPaginator

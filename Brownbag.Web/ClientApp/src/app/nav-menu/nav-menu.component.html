@@ -13,17 +13,19 @@
           <a class="nav-link" routerLink="" routerLinkActive="selected">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="counter" routerLinkActive="selected">Counter</a>
+          <a class="nav-link" routerLink="counter" routerLinkActive="selected" *ngIf="userService.isInRole('Developer') | async">Counter</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" routerLink="fetch-data" routerLinkActive="selected">Fetch Data</a>
+            <a class="nav-link" routerLink="fetch-data" routerLinkActive="selected" *ngIf="userService.isInRole('Developer') | async">Fetch Data</a>
           </li>
-        <li ngbDropdown class="d-inline-block">
+        <li ngbDropdown class="d-inline-block" *ngIf="userService.isInRole('Administrator') | async">
           <a class="nav-link" id="Management" ngbDropdownToggle>Blog Management</a>
           <div ngbDropdownMenu aria-labelledby="Management">
             <a class="nav-link" routerLink="blog" routerLinkActive="selected">Blog</a>
             <a class="nav-link" routerLink="post" routerLinkActive="selected">Post</a>
             <a class="nav-link" routerLink="blogview" routerLinkActive="selected">Blog View</a>
+            <a class="nav-link" routerLink="blogviewfk" routerLinkActive="selected">Blog FK View</a>
+            <a class="nav-link" routerLink="users" routerLinkActive="selected">User</a>
           </div>
         </li>
       </ul>

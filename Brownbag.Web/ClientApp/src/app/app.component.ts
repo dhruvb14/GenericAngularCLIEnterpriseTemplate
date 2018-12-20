@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { UserService, UserModel } from '../shared/service/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +11,9 @@ import { Router, NavigationEnd } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'Brownbag';
   footer = new Date().getFullYear() + ' Brownbag';
-  constructor(private router: Router) {
+  public user: Observable<UserModel>;
+  constructor(private router: Router, public userService: UserService) {
+    this.user = userService.user;
   }
   ngOnInit() {
     // This is so anytime you click a link it takes you to the top of the page

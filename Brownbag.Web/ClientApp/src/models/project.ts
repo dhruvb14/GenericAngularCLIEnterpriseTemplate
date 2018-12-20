@@ -2,20 +2,25 @@
 //     Changes to this file may cause incorrect behavior and will be lost if
 //     the code is regenerated.
 
-module Brownbag.Web.Models {
-	export interface BlogPostsViewModel extends Brownbag.Web.Models.PostViewModel
+module Models {
+	export interface BlogPostsViewModel extends Models.PostViewModel
 	{
-		CreatedByUser: Brownbag.Web.Models.UsersViewModel;
-		UpdatedByUser: Brownbag.Web.Models.UsersViewModel;
+		CreatedByUser: Models.UsersViewModel;
+		UpdatedByUser: Models.UsersViewModel;
 		CreatedDate: any;
 		UpdatedDate: any;
+	}
+	export interface BlogFKViewModel extends Models.BlogViewModel
+	{
+		WeatherID: number;
+		WeatherCityName: string;
 	}
 	export interface BlogViewModel
 	{
 		Id: number;
 		Url: string;
 		Rating: number;
-		Posts: Brownbag.Web.Models.PostViewModel[];
+		Posts: Models.PostViewModel[];
 	}
 	export interface GuidLookupViewModel
 	{
@@ -27,6 +32,18 @@ module Brownbag.Web.Models {
 		ID: number;
 		Value: string;
 	}
+	export interface OptionsLookupViewModel
+	{
+		label: string;
+		value: number;
+		disabled: boolean;
+	}
+	export interface StringOptionsLookupViewModel
+	{
+		label: string;
+		value: string;
+		disabled: boolean;
+	}
 	export interface PostViewModel
 	{
 		Id: number;
@@ -37,7 +54,11 @@ module Brownbag.Web.Models {
 	}
 	export interface UsersViewModel
 	{
+		Id: string;
+		UserName: string;
 		UserFullName: string;
+		Roles: Models.StringOptionsLookupViewModel[];
+		Active: boolean;
 	}
 	export interface WeatherForecastViewModel
 	{
@@ -47,7 +68,7 @@ module Brownbag.Web.Models {
 		Summary: string;
 	}
 }
-module Brownbag.Web.Models.PrimeNG.Grid {
+module Models.PrimeNG.Grid {
 	export interface GridPaginator
 	{
 		First: number;
@@ -55,7 +76,7 @@ module Brownbag.Web.Models.PrimeNG.Grid {
 		PageCount: number;
 		Rows: number;
 	}
-	export interface GridViewModel<T> extends Brownbag.Web.Models.PrimeNG.Grid.GridPaginator
+	export interface GridViewModel<T> extends Models.PrimeNG.Grid.GridPaginator
 	{
 		Data: T[];
 		Errors: string;

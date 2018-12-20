@@ -1,5 +1,5 @@
 using Brownbag.Data.Models;
-using Brownbag.Web.Models;
+using Models;
 
 namespace Brownbag.Web.Automapper
 {
@@ -9,6 +9,8 @@ namespace Brownbag.Web.Automapper
         {
             CreateMap<Blog, BlogViewModel>()
            .ReverseMap();
+            CreateMap<Blog, BlogFKViewModel>()
+           .ReverseMap();           
             CreateMap<Post, PostViewModel>()
            .ReverseMap();
            CreateMap<Post, BlogPostsViewModel>();

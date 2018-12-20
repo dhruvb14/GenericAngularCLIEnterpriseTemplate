@@ -6,10 +6,10 @@ import { Component, Inject } from '@angular/core';
   templateUrl: './fetch-data.component.html'
 })
 export class FetchDataComponent {
-  public forecasts: Brownbag.Web.Models.WeatherForecastViewModel[];
+  public forecasts: Models.WeatherForecastViewModel[];
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Brownbag.Web.Models.WeatherForecastViewModel[]>(baseUrl + 'api/SampleData/WeatherForecasts').subscribe(result => {
+    http.get<Models.WeatherForecastViewModel[]>(baseUrl + 'api/SampleData/WeatherForecasts').subscribe(result => {
       this.forecasts = result;
     }, error => console.error(error));
   }

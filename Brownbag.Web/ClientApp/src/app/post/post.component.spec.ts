@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PostData } from './post.data';
 import { LookupsService } from '../../shared/service/lookups.service';
+import { UserService } from '../../shared/service/user.service';
 
 describe('PostComponent', () => {
   let component: PostComponent;
@@ -28,7 +29,9 @@ describe('PostComponent', () => {
   const mockLookupService = jasmine.createSpyObj('mockLookupService', ['getBlogs']);
   const mockAdvGrowlService = jasmine.createSpyObj('mockAdvGrowlService', ['createSuccessMessage']);
   const mockBlogViewService = jasmine.createSpyObj('mockBlogViewService', ['getGrid']);
-  const afrTypesResponse: Brownbag.Web.Models.LookupViewModel[] = [
+  const mockUserService = jasmine.createSpyObj('mockUserService', ['']);
+
+  const afrTypesResponse: Models.LookupViewModel[] = [
     { 'ID': 1, 'Value': 'google.com' },
     { 'ID': 2, 'Value': 'apple.com' }
   ];
@@ -57,6 +60,8 @@ describe('PostComponent', () => {
         { provide: LookupsService, useValue: mockLookupService },
         { provide: PostService, useValue: mockBlogViewService },
         { provide: AdvGrowlService, useValue: mockAdvGrowlService },
+        { provide: UserService, useValue: mockUserService },
+
       ]
     })
     .compileComponents();

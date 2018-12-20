@@ -1,27 +1,16 @@
 
-import {throwError as observableThrowError,  Observable } from 'rxjs';
+import { throwError as observableThrowError, Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
 
 export abstract class BaseService {
 
-    constructor() {    }
+    constructor() { }
 
     protected handleError(error: HttpErrorResponse) {
 
         const applicationError = error.error;
         let errorMessage = '';
-        if (error.status === 401) {
-            errorMessage = 'Your Login token has expired. Please reload the page. All changes will be lost\n';
-            return observableThrowError(errorMessage);
-        }
-        if (error.status === 403) {
-            errorMessage = 'You are not authorized to access that data\n';
-            return observableThrowError(errorMessage);
-        }
-        if (error.status === 404) {
-            errorMessage = 'File Not Found\n';
-            return observableThrowError(errorMessage);
-        }
+
         // tslint:disable-next-line:forin
         for (const e in applicationError) {
             errorMessage += e + ': ' + applicationError[e] + '\n';
@@ -34,7 +23,7 @@ export abstract class BaseService {
         let modelStateErrors = '';
         const serverError = error.error;
 
-        if (!serverError.type) {
+        if (serverError && !serverError.type) {
             for (const key in serverError) {
                 if (serverError[key]) {
                     modelStateErrors += serverError[key] + '\n';
@@ -43,6 +32,8 @@ export abstract class BaseService {
         }
 
         modelStateErrors = modelStateErrors = '' ? null : modelStateErrors;
-        return observableThrowError(errorMessage || 'Server error');
+        if (errorMessage) {
+            return observableThrowError(errorMessage || 'Server error');
+        }
     }
 }

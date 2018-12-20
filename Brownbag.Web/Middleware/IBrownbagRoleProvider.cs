@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
-using Brownbag.Web.Models;
+using Models;
 
 namespace Brownbag.Web.Middleware
 {

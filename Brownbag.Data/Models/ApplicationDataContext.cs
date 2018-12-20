@@ -1,4 +1,5 @@
 using System;
+using Bom.Data;
 using Brownbag.Data.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -6,37 +7,28 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Brownbag.Data.Models
-{
-    public partial class ApplicationDataContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
-    {
+namespace Brownbag.Data.Models {
+    public partial class ApplicationDataContext : IdentityDbContext<User, IdentityRole<Guid>, Guid> {
         private IHttpContextAccessor _context { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Post> Posts { get; set; }
-        public ApplicationDataContext(DbContextOptions<ApplicationDataContext> options, IHttpContextAccessor contextAccessor) : base(options)
-        {
+        public ApplicationDataContext(DbContextOptions<ApplicationDataContext> options, IHttpContextAccessor contextAccessor) : base(options) {
             _context = contextAccessor;
         }
-        public override int SaveChanges()
-        {
+        public override int SaveChanges() {
             // https://stackoverflow.com/questions/36401026/how-to-get-user-information-in-dbcontext-using-net-core
             // https://stackoverflow.com/questions/35765204/how-can-i-get-user-and-claim-information-using-action-filters/35826744
-            foreach (var auditableEntity in ChangeTracker.Entries<IAuditable>())
-            {
+            foreach (var auditableEntity in ChangeTracker.Entries<IAuditable>()) {
                 if (auditableEntity.State == EntityState.Added ||
-                    auditableEntity.State == EntityState.Modified)
-                {
+                    auditableEntity.State == EntityState.Modified) {
 
                     auditableEntity.Entity.UpdatedDate = DateTime.Now;
                     auditableEntity.Entity.UpdatedBy = new Guid(_context.HttpContext.User.FindFirst("userId").Value);
 
-                    if (auditableEntity.State == EntityState.Added)
-                    {
+                    if (auditableEntity.State == EntityState.Added) {
                         auditableEntity.Entity.CreatedDate = DateTime.Now;
                         auditableEntity.Entity.CreatedBy = new Guid(_context.HttpContext.User.FindFirst("userId").Value);
-                    }
-                    else
-                    {
+                    } else {
                         auditableEntity.Property(p => p.CreatedDate).IsModified = false;
                         auditableEntity.Property(p => p.CreatedBy).IsModified = false;
                     }
@@ -44,8 +36,7 @@ namespace Brownbag.Data.Models
             }
             return base.SaveChanges();
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.Entity<User>()
                 .HasMany(e => e.Roles)
                 .WithOne()
@@ -82,6 +73,11 @@ namespace Brownbag.Data.Models
                 entity.HasKey(r => r.UserId);
                 entity.ToTable("AspNetUserTokens");
             });
+
+            UserSeedData.Initialize(modelBuilder);
+            BlogSeedData.Initialize(modelBuilder);
+            PostSeedData.Initialize(modelBuilder);
+
         }
     }
 }

@@ -19,5 +19,6 @@ namespace Brownbag.Data.Models
         /// Navigation property for the roles this user belongs to.
         /// </summary>
         public virtual ICollection<IdentityUserRole<Guid>> Roles { get; } = new List<IdentityUserRole<Guid>>();
+        public bool Active { get; set; }
     }
 }
