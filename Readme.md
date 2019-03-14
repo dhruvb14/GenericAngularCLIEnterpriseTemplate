@@ -28,7 +28,7 @@ This section will go through setting up your project for a Modern Web Applicatio
 mkdir brownbags
 cd brownbags
 dotnet new --install Microsoft.DotNet.Web.Spa.ProjectTemplates::2.0.0
-dotnet new angular -o 'Brownbag.Web'
+dotnet new angular -o 'Brownbag.Web' -f netcoreapp2.0
 dotnet new classlib -o 'Brownbag.Data'
 mkdir Brownbag.Web/ClientApp/offline-resources
 mkdir Brownbag.Web/Models
