@@ -6,7 +6,8 @@
 	],
 	"settings": {
 		"csharpfixformat.style.spaces.beforeParenthesis": false,
-		"npm.enableScriptExplorer": true
+		"npm.enableScriptExplorer": true,
+		"http.proxyStrictSSL": false
 	},
 	"extensions": {
 		"recommendations": [
@@ -25,7 +26,7 @@
 			"miclo.sort-typescript-imports",
 			"eg2.tslint",
 			"rbbit.typescript-hero",
-			"robertohuertasm.vscode-icons",
+			"vscode-icons-team.vscode-icons",
 			"hbenl.vscode-firefox-debug"
 		]
 	}
