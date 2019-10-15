@@ -5,17 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { AdvGrowlModule } from 'primeng-advanced-growl';
-import {
-  DropdownModule,
-  DialogModule,
-  PaginatorModule,
-  InputTextareaModule,
-  RatingModule,
-  EditorModule,
-  DataGridModule,
-  CardModule,
-  ListboxModule
-} from 'primeng/primeng';
 import { LookupsService } from '../shared/service/lookups.service';
 import { AppComponent } from './app.component';
 import { BlogFKComponent } from './blog-fk/blog-fk.component';
@@ -37,6 +26,15 @@ import { HttpRequestInterceptor } from '../shared/service/http-request.intercept
 import { UsersComponent } from './users/users.component';
 import { TableModule } from 'primeng/table';
 import { UsersLookupService } from './users/users-lookup.service';
+import { DropdownModule } from 'primeng/dropdown';
+import { DialogModule } from 'primeng/dialog';
+import { PaginatorModule } from 'primeng/paginator';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { RatingModule } from 'primeng/rating';
+import { EditorModule } from 'primeng/editor';
+import { DataGridModule } from 'primeng/datagrid';
+import { CardModule } from 'primeng/card';
+import { ListboxModule } from 'primeng/listbox';
 
 @NgModule({
   declarations: [
@@ -53,7 +51,7 @@ import { UsersLookupService } from './users/users-lookup.service';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    NgbModule.forRoot(),
+    NgbModule,
     HttpClientModule,
     FormsModule,
     DropdownModule,
