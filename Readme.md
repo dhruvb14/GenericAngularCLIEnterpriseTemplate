@@ -2449,7 +2449,7 @@ Create file in `Brownbag.Web/ClientApp/src/app/blog-view` folder named `blog-vie
     <p-dataGrid [value]="state.Data" [rows]="state.Rows">
       <ng-template let-car pTemplate="item">
         <div class="ui-g-12">
-          <p-card [title]="car.Title" [subtitle]="'Written by: '+ car?.CreatedByUser?.UserFullName">
+          <p-card [header]="car.Title" [subheader]="'Written by: '+ car?.CreatedByUser?.UserFullName">
             <div class="ui-card-subtitle"> {{car?.CreatedDate | date:'short'}}</div>
             <div class="ui-card-content" [innerHTML]="car.Content"></div>
             <p-footer *ngIf="car?.UpdatedByUser?.UserFullName !== car?.CreatedByUser?.UserFullName">
